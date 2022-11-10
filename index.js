@@ -2,7 +2,7 @@ import './config.js'
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-import { registerUser } from './controller/userController.js'
+import { registerUser, loginUser } from './controller/userController.js'
 
 const PORT = process.env.PORT
 const app = express()
@@ -18,6 +18,8 @@ app.use(express.json())
 //CRUDS 
 //User Registration
 app.post('/api/registration', registerUser)
+//User Login
+app.post('/api/login', loginUser)
 
 
 app.listen(PORT, () => console.log("Server was started on Port ", PORT))
