@@ -1,4 +1,5 @@
-import { saveUser } from "../services/userService.js";
+import { saveUser, userLogin } from "../services/userService.js";
+
 
 export const registerUser = async (req, res) => {
     try {
@@ -8,5 +9,20 @@ export const registerUser = async (req, res) => {
         res.status(200).json({ message: 'user added' })
     } catch (error) {
         res.status(500).json({ error: ('An' + error + 'Error happened') })
+    }
+
+    export const login = async (req, res) => {
+        const user = req.body
+
+        let result = await userLogin(user)
+        console.log('result`:', result)
+
+        if (result.password === user.password) {
+            const token = createToken({ user: result._id,role: result.roles })
+            res.status(200).json({ token: token })
+        }
+        else {
+            res.status(403).json({ message: 'Fehler beim Anmelden' })
+        }
     }
 }
