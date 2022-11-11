@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import { registerUser, loginUser } from './controller/userController.js'
+import { getMusic } from './controller/musicController.js'
 
 const PORT = process.env.PORT
 const app = express()
@@ -20,6 +21,8 @@ app.use(express.json())
 app.post('/api/registration', registerUser)
 //User Login
 app.post('/api/login', loginUser)
+//Testin the api
+app.get('/api/getallmusic', getMusic)
 
 
 app.listen(PORT, () => console.log("Server was started on Port ", PORT))
