@@ -12,6 +12,7 @@ export const registerUser = async (req, res) => {
     }
 
     export const login = async (req, res) => {
+        try {
         const user = req.body
 
         let result = await userLogin(user)
@@ -21,8 +22,8 @@ export const registerUser = async (req, res) => {
             const token = createToken({ user: result._id,role: result.roles })
             res.status(200).json({ token: token })
         }
-        else {
-            res.status(403).json({ message: 'Fehler beim Anmelden' })
+    } catch(err) {
+            res.status(403).json({ err: 'Fehler beim Anmelden' })
         }
     }
 }
