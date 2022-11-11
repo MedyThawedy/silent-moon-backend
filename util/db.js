@@ -12,3 +12,4 @@ export const getDb = async () => {
     db = client.db(DB)
     return db
 } 
+
