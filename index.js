@@ -14,6 +14,7 @@ app.use(morgan('dev'))
 app.use(cors())
 //app.use(express.json({ limit: '10mb' }))
 app.use(express.json())
+app.use(express.urlencoded({ limit: '50mb' }));
 
 
 //CRUDS 
@@ -24,5 +25,6 @@ app.post('/api/login', loginUser)
 //Testin the api
 app.get('/api/getallmusic', getMusic)
 
+app.get('/api/verify', verifyBearer)
 
 app.listen(PORT, () => console.log("Server was started on Port ", PORT))
