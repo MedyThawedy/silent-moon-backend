@@ -44,30 +44,34 @@ export const registerUser = async (req, res) => {
 
 
 export const loginUser = async (req, res) => {
-    const user = req.body
-    const findUser = await findOneUserWithThisEmailAdress(user.email)
-    const encryptedPasswordFromReqBody = encryptThisPassword(req.body.password);
-    console.log('The user is : ', findUser)
-    if (findUser) {
-        console.log('findUser User gefunden ', findUser)
-        if (encryptedPasswordFromReqBody === findUser.password) {
-            console.log('Password Überprüfung erfolgreich , ')
-            console.log(encryptedPasswordFromReqBody)
-            console.log(findUser.password)
+    try {
+        const user = req.body
+        const findUser = await findOneUserWithThisEmailAdress(user.email)
+        const encryptedPasswordFromReqBody = encryptThisPassword(req.body.password);
+        console.log('The user is : ', findUser)
+        if (findUser) {
+            console.log('findUser User gefunden ', findUser)
+            if (encryptedPasswordFromReqBody === findUser.password) {
+                console.log('Password Überprüfung erfolgreich , ')
+                console.log(encryptedPasswordFromReqBody)
+                console.log(findUser.password)
 
-            const token = createToken({ user: findUser._id })
+                const token = createToken({ user: findUser._id })
 
-            res.status(200).json({ token: token })
+                res.status(200).json({ token: token })
+            }
+            else {
+                res.status(403).json({ message: '1 Wrong Login Data! Please try again! ' })
+            }
+        } else {
+            res.status(403).json({ message: '2 Wrong Login Data! Please try again! ' })
+            console.log('from loginUser', encryptedPasswordFromReqBody)
+            console.log('from loginUser', typeof (encryptedPasswordFromReqBody))
+            console.log('from loginUser', findUser.password)
+            console.log('from loginUser', typeof (findUser.password))
         }
-        else {
-            res.status(403).json({ message: '1 Wrong Login Data! Please try again! ' })
-        }
-    } else {
-        res.status(403).json({ message: '2 Wrong Login Data! Please try again! ' })
-        console.log('from loginUser', encryptedPasswordFromReqBody)
-        console.log('from loginUser', typeof (encryptedPasswordFromReqBody))
-        console.log('from loginUser', findUser.password)
-        console.log('from loginUser', typeof (findUser.password))
+    } catch (error) {
+        res.status(500).json({ error: ('An' + error + 'Error happened') })
     }
 
 }
