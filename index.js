@@ -20,30 +20,31 @@ app.use(cors())
 app.use(express.json())
 
 
-//CRUDS 
-//User Registration
+// CRUDS 
+// User Registration // Relation = Sign up
 app.post('/api/registration', registerUser)
-//User Login
+// User Login // Relation = Sign in 
 app.post('/api/login', loginUser)
-//Testing the api
+
+// Relation to Music
 app.get('/api/getallmusic', getMusic)
 
-// Get one random yoga programm for the home component
+// Get one random yoga programm for the home component // Relation = Home component (On the top left)  
 app.get('/api/getrandomyoga', getOneRandomYoga)
-// Search Yoga Programm by title
+// Search Yoga Programm by title // Relation = Home, Yoga and Maybe Profile component (Search field)
 app.get('/api/findyoga', searchYogaProgramm)
-// Find 4 Recommendation Meditation Programm
+// Find 4 Recommendation Yoga Programm // Relation = Yoga above the navigation
 app.get('/api/recommendedyoga', searchRecommendedYogaProgram)
-// Yoga Details
+// Relation = Yoga Details
 app.get('/api/getyoga/:id', getYogaDetails)
 
-// Get one random meditation programm for the home component
+// Get one random meditation programm for the home component // Relation = Home component (On the top right)
 app.get('/api/getrandommeditation', getOneRandomMeditation)
-// Search Meditation Programm
+// Search Meditation Programm // Relation = Home, Meditate and Maybe Profile component (Search field)
 app.get('/api/findmeditation', searchMeditationProgram)
-// Find 4 Recommendation Meditation Programm
+// Find 4 Recommendation Meditation Programm // Relation = Meditate above the navigation
 app.get('/api/recommendedmeditation', searchRecommendedMeditationProgram)
-// Meditation Details
+// Relation = Meditation Details 
 app.get('/api/getmeditation/:id', getMeditationDetails)
 
 
