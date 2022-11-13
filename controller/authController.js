@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { verifyToken } from "../util/token"
-=======
 import { verifyToken } from "../util/token.js"
->>>>>>> develop
 
 export const verifyBearer = (req, res) => {
     try {
@@ -16,8 +12,4 @@ export const verifyBearer = (req, res) => {
         res.status(403).json({ state: false })
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
 }
