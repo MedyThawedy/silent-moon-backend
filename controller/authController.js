@@ -6,6 +6,7 @@ export const verifyBearer = (req, res) => {
         const result = verifyToken(token)
         console.log(result);
         res.status(200).json({ state: true })
+        // User Daten zuruck schicken 
 
     } catch (error) {
         console.log(error);

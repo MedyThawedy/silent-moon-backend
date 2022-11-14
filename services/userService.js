@@ -2,7 +2,6 @@ import { ObjectId } from "mongodb"
 import { getDb } from '../util/db.js'
 
 
-
 export const saveUser = async (user) => {
     const db = await getDb();
 
@@ -26,6 +25,7 @@ export const findRelationUserFavoriteToYoga = async (userid) => {
     const db = await getDb();
 
     const displayRelationBetweenUserAndYoga = await db.collection('user').aggregate([
+        { $match: { _id: new ObjectId(userid) } },
         {
             $lookup:
             {

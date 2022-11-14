@@ -39,7 +39,7 @@ export const findYogaDetails = async (id) => {
 // Find User with the userid and insert yoga_id in the user collection
 export const pushUserFavoriteYoga = async (yogaid, userid) => {
     const db = await getDb()
-    const result = await db.collection('user').updateOne({ _id: new ObjectId(userid) }, { $push: { yoga_id: [new ObjectId(yogaid)] } })
+    const result = await db.collection('user').updateOne({ _id: new ObjectId(userid) }, { $push: { yoga_id: ObjectId(yogaid) } })
     return result
 }
 
