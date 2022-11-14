@@ -1,4 +1,4 @@
-import { verifyToken } from "../util/token"
+import { verifyToken } from "../util/token.js"
 
 export const verifyBearer = (req, res) => {
     try {
@@ -6,6 +6,7 @@ export const verifyBearer = (req, res) => {
         const result = verifyToken(token)
         console.log(result);
         res.status(200).json({ state: true })
+        // User Daten zuruck schicken 
 
     } catch (error) {
         console.log(error);

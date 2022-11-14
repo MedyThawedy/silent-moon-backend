@@ -23,7 +23,9 @@ export const findYogaProgramm = async (searchStr) => {
 export const findRecommendFourRandomYoga = async () => {
     // Get a playlist
     const db = await getDb();
-    const fourRandomYoga = await db.collection('yoga').find().limit(4).toArray()
+    // const fourRandomYoga = await db.collection('yoga').find().limit(4).toArray()
+    const fourRandomYoga = await db.collection('yoga').aggregate([{ $sample: { size: 4 } }]).toArray()
+
     return fourRandomYoga;
 }
 
@@ -32,3 +34,13 @@ export const findYogaDetails = async (id) => {
     const result = await db.collection('yoga').findOne({ _id: new ObjectId(id) })
     return result
 }
+
+//https://www.w3resource.com/mongodb/mongodb-array-update-operator-$push.php
+// Find User with the userid and insert yoga_id in the user collection
+export const pushUserFavoriteYoga = async (yogaid, userid) => {
+    const db = await getDb()
+    const result = await db.collection('user').updateOne({ _id: new ObjectId(userid) }, { $push: { yoga_id: ObjectId(yogaid) } })
+    return result
+}
+
+

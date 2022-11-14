@@ -2,15 +2,23 @@ import './config.js'
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
-import { registerUser, loginUser } from './controller/userController.js'
-import { getMusic } from './controller/musicController.js'
-import { getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, getYogaDetails } from './controller/yogaController.js'
-import { getOneRandomMeditation, searchMeditationProgram, searchRecommendedMeditationProgram, getMeditationDetails } from './controller/meditationController.js'
-
+import { verifyBearer } from './controller/authController.js'
+import { router as userRouter } from './router/userRouter.js'
+import { router as musicRouter } from './router/musicRouter.js'
+import { router as yogaRouter } from './router/yogaRouter.js'
+import { router as meditationRouter } from './router/meditationRouter.js'
+import { router as reminderRouter } from './router/reminderRouter.js'
 
 
 const PORT = process.env.PORT
 const app = express()
+
+https://javascript.plainenglish.io/how-to-fix-413-request-entity-too-large-error-in-node-js-226c0070e4f4
+// fixing "413 Request Entity Too Large" errors
+app.use(express.json({ limit: "10mb", extended: true }))
+app.use(express.urlencoded({ limit: "10mb", extended: true, parameterLimit: 50000 }))//
+
+// GridFs
 
 //middleware
 //app.use(cors({origin: "http://localhost:3000"}));
@@ -18,35 +26,13 @@ app.use(morgan('dev'))
 app.use(cors())
 //app.use(express.json({ limit: '10mb' }))
 app.use(express.json())
-app.use(express.urlencoded({ limit: '50mb' }));
 
-
-//CRUDS 
-//User Registration
-app.post('/api/registration', registerUser)
-//User Login
-app.post('/api/login', loginUser)
-//Testing the api
-app.get('/api/getallmusic', getMusic)
-
+app.use('/', userRouter)
 app.get('/api/verify', verifyBearer)
-// Get one random yoga programm for the home component
-app.get('/api/getrandomyoga', getOneRandomYoga)
-// Search Yoga Programm by title
-app.get('/api/findyoga', searchYogaProgramm)
-// Find 4 Recommendation Meditation Programm
-app.get('/api/recommendedyoga', searchRecommendedYogaProgram)
-// Yoga Details
-app.get('/api/getyoga/:id', getYogaDetails)
-
-// Get one random meditation programm for the home component
-app.get('/api/getrandommeditation', getOneRandomMeditation)
-// Search Meditation Programm
-app.get('/api/findmeditation', searchMeditationProgram)
-// Find 4 Recommendation Meditation Programm
-app.get('/api/recommendedmeditation', searchRecommendedMeditationProgram)
-// Meditation Details
-app.get('/api/getmeditation/:id', getMeditationDetails)
+app.use('/', musicRouter)
+app.use('/', yogaRouter)
+app.use('/', meditationRouter)
+app.use('/', reminderRouter)
 
 
 
