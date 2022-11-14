@@ -19,13 +19,11 @@ export const findOneUserWithThisEmailAdress = async (email) => {
     return findEmail;
 }
 
-<<<<<<< HEAD
 export const userLogin = async (user) => {
     const db = await getDb()
     const result = await db.collection('user').findOne({ email: user.email })
     return result
 }
-=======
 // This function will join user with yoga on user.yoga_id = yoga._id
 export const findRelationUserFavoriteToYoga = async (userid) => {
 
@@ -46,4 +44,3 @@ export const findRelationUserFavoriteToYoga = async (userid) => {
 
     return displayRelationBetweenUserAndYoga;
 }
->>>>>>> develop
