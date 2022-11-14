@@ -8,7 +8,6 @@ import { getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, get
 import { getOneRandomMeditation, searchMeditationProgram, searchRecommendedMeditationProgram, getMeditationDetails } from './controller/meditationController.js'
 
 
-
 const PORT = process.env.PORT
 const app = express()
 
