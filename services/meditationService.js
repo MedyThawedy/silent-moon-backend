@@ -37,7 +37,29 @@ export const findMeditationDetails = async (id) => {
 // Find User with the userid and insert meditation_id in the user collection
 export const pushUserFavoriteMeditation = async (meditationid, userid) => {
     const db = await getDb()
-    const result = await db.collection('user').updateOne({ _id: new ObjectId(userid) }, { $push: { meditation_id: [new ObjectId(meditationid)] } })
+    const result = await db.collection('user').updateOne({ _id: new ObjectId(userid) }, { $push: { meditation_id: ObjectId(meditationid) } })
     return result
 }
+
+// This function will join meditation with music on meditation.music_id = music._id
+export const findRelationMeditationMusic = async (meditationid) => {
+
+    const db = await getDb();
+
+    const displayRelationMeditationMusic = await db.collection('meditation').aggregate([
+        { $match: { _id: new ObjectId(meditationid) } },
+        {
+            $lookup:
+            {
+                from: 'music',
+                localField: 'music_id',
+                foreignField: '_id',
+                as: 'meditationplaylist' // You can use another string here instead of music_id
+            }
+        }
+    ]).toArray()
+
+    return displayRelationMeditationMusic;
+}
+
 

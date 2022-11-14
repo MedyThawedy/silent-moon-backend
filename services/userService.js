@@ -39,3 +39,48 @@ export const findRelationUserFavoriteToYoga = async (userid) => {
 
     return displayRelationBetweenUserAndYoga;
 }
+
+// This function will join user with yoga on user.meditation_id = meditation._id
+export const findRelationUserFavoriteToMeditation = async (userid) => {
+
+    const db = await getDb();
+
+    const displayRelationBetweenUserAndMeditation = await db.collection('user').aggregate([
+        { $match: { _id: new ObjectId(userid) } },
+        {
+            $lookup:
+            {
+                from: 'meditation',
+                localField: 'meditation_id',
+                foreignField: '_id',
+                as: 'favoritemeditation' // You can use another string here instead of yoga_id
+            }
+        }
+    ]).toArray()
+
+    return displayRelationBetweenUserAndMeditation;
+}
+
+
+// This function will join user with yoga on user.meditation_id = meditation._id
+export const findRelationUserFavoriteToMusic = async (userid) => {
+
+    const db = await getDb();
+
+    const displayRelationBetweenUserAndMusic = await db.collection('user').aggregate([
+        { $match: { _id: new ObjectId(userid) } },
+        {
+            $lookup:
+            {
+                from: 'music',
+                localField: 'music_id',
+                foreignField: '_id',
+                as: 'favoritemusic' // You can use another string here instead of yoga_id
+            }
+        }
+    ]).toArray()
+
+    return displayRelationBetweenUserAndMusic;
+}
+
+

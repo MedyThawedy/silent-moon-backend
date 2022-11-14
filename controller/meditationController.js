@@ -1,5 +1,5 @@
 
-import { findOneRandomMeditation, findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails, pushUserFavoriteMeditation } from '../services/meditationService.js';
+import { findOneRandomMeditation, findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails, pushUserFavoriteMeditation, findRelationMeditationMusic } from '../services/meditationService.js';
 
 export const getOneRandomMeditation = async (req, res) => {
     try {
@@ -59,6 +59,19 @@ export const pushToUserMeditationFavoriteList = async (req, res) => {
     const user_id = req.body.user_id
     try {
         const result = await pushUserFavoriteMeditation(meditation_id, user_id)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+// getMeditationPlayList
+export const getMeditationPlayList = async (req, res) => {
+    //const userid = req.body.userid;
+    const meditation_id = req.params.id;
+    try {
+        const result = await findRelationMeditationMusic(meditation_id)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {

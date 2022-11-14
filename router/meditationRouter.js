@@ -1,5 +1,5 @@
 import express from 'express'
-import { getOneRandomMeditation, searchMeditationProgram, searchRecommendedMeditationProgram, getMeditationDetails, pushToUserMeditationFavoriteList } from '../controller/meditationController.js'
+import { getOneRandomMeditation, searchMeditationProgram, searchRecommendedMeditationProgram, getMeditationDetails, pushToUserMeditationFavoriteList, getMeditationPlayList } from '../controller/meditationController.js'
 
 export const router = new express.Router()
 
@@ -13,3 +13,9 @@ router.get('/api/recommendedmeditation', searchRecommendedMeditationProgram)
 router.get('/api/getmeditation/:id', getMeditationDetails)
 //pushToUserMeditationFavoriteList
 router.put('/api/addmeditationfavorite/:id', pushToUserMeditationFavoriteList)
+
+// Relation = Meditation Details 
+router.get('/api/getmeditation/:id', getMeditationDetails)
+
+//Relation = Meditation Music List
+router.get('/api/meditationmusic/:id', getMeditationPlayList)

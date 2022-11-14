@@ -42,8 +42,8 @@ export const getYogaDetails = async (req, res) => {
     }
 }
 
-
-// setFavoriteYoga
+// ????
+// setFavoriteYoga 
 export const setFavoriteYoga = async (req, res) => {
     const yoga_id = req.params.id
     const user_id = req.body.user_id
