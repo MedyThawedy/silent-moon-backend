@@ -1,4 +1,4 @@
-
+import { ObjectId } from "mongodb"
 import { getDb } from '../util/db.js'
 
 
@@ -18,4 +18,24 @@ export const findOneUserWithThisEmailAdress = async (email) => {
         $or: [{ email: email }]
     })
     return findEmail;
+}
+
+// This function will join user with yoga on user.yoga_id = yoga._id
+export const findRelationUserFavoriteToYoga = async (userid) => {
+
+    const db = await getDb();
+
+    const displayRelationBetweenUserAndYoga = await db.collection('user').aggregate([
+        {
+            $lookup:
+            {
+                from: 'yoga',
+                localField: 'yoga_id',
+                foreignField: '_id',
+                as: 'favoriteyoga' // You can use another string here instead of yoga_id
+            }
+        }
+    ]).toArray()
+
+    return displayRelationBetweenUserAndYoga;
 }

@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser } from '../controller/userController.js'
+import { registerUser, loginUser, connectUserFavoriteYoga } from '../controller/userController.js'
 
 export const router = new express.Router()
 
@@ -8,3 +8,6 @@ export const router = new express.Router()
 router.post('/api/registration', registerUser)
 // User Login // Relation = Sign in 
 router.post('/api/login', loginUser)
+
+//Relation = User Profile First Block Favorite Yoga Sessions
+router.get('/api/userfavoriteyoga', connectUserFavoriteYoga)

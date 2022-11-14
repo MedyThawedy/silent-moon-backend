@@ -1,4 +1,4 @@
-import { saveUser, findOneUserWithThisEmailAdress } from "../services/userService.js"
+import { saveUser, findOneUserWithThisEmailAdress, findRelationUserFavoriteToYoga } from "../services/userService.js"
 import validator from 'email-validator'
 import { checkPasswordValidation } from "../util/dataValidator.js"
 import { encryptThisPassword } from "../util/dataEncryptor.js"
@@ -74,4 +74,16 @@ export const loginUser = async (req, res) => {
         res.status(500).json({ error: ('An' + error + 'Error happened') })
     }
 
+}
+
+
+export const connectUserFavoriteYoga = async (req, res) => {
+    const userid = req.body.userid;
+    try {
+        const result = await findRelationUserFavoriteToYoga(userid)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
 }
