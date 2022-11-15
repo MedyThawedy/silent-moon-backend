@@ -32,7 +32,7 @@ export const pushToUserMusicFavoriteList = async (req, res) => {
 }
 
 export const pushToMeditation = async (req, res) => {
-    const music_id = req.body.meditation_id
+    const music_id = req.body.music_id
     //?????????
     const meditation_id = req.body.meditation_id
     try {

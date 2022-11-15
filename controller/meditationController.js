@@ -1,5 +1,5 @@
 
-import { findOneRandomMeditation, findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails, pushUserFavoriteMeditation, findRelationMeditationMusic } from '../services/meditationService.js';
+import { findOneRandomMeditation, findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails, pushUserFavoriteMeditation, findRelationMeditationMusic, findMeditationCategory } from '../services/meditationService.js';
 
 export const getOneRandomMeditation = async (req, res) => {
     try {
@@ -12,9 +12,11 @@ export const getOneRandomMeditation = async (req, res) => {
 
 
 export const searchMeditationProgram = async (req, res) => {
-    const searchStr = req.body.searchmeditationstring
+    //  const searchStr = req.body.searchmeditationstring
+    let searchObj = req.query
+    let searchmeditationstring = searchObj.searchmeditationstring
     try {
-        const meditationprogramm = await findMeditationProgram(searchStr)
+        const meditationprogramm = await findMeditationProgram(searchmeditationstring)
         res.status(200).json(meditationprogramm);
     } catch (err) {
         res.status(500).json({ error: err })
@@ -72,6 +74,22 @@ export const getMeditationPlayList = async (req, res) => {
     const meditation_id = req.params.id;
     try {
         const result = await findRelationMeditationMusic(meditation_id)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+// searchYogaCategory
+export const searchMeditationCategory = async (req, res) => {
+    //?????????
+    let query = req.query;
+
+    let strmeditationcategory = query.strmeditationcategory;
+
+    try {
+        const result = await findMeditationCategory(strmeditationcategory)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {

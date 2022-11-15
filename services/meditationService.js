@@ -63,3 +63,16 @@ export const findRelationMeditationMusic = async (meditationid) => {
 }
 
 
+// 
+export const findMeditationCategory = async (searchStr) => {
+    // Get a playlist
+    const db = await getDb();
+    //const sqlLikeStatement = "/" + searchStr + "/"
+    //{'title': {'$regex': searchStr}}
+    const yogaprogramm = await db.collection('meditation').find({ 'category': { '$regex': searchStr } }).toArray()
+    //const yogaprogramm = await db.collection('yoga').find({ title: sqlLikeStatement }).toArray()
+    return yogaprogramm;
+}
+
+
+
