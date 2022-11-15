@@ -1,4 +1,4 @@
-import { saveUser, findOneUserWithThisEmailAdress, findRelationUserFavoriteToYoga } from "../services/userService.js"
+import { saveUser, findOneUserWithThisEmailAdress, findRelationUserFavoriteToYoga, findRelationUserFavoriteToMeditation, findRelationUserFavoriteToMusic } from "../services/userService.js"
 import validator from 'email-validator'
 import { checkPasswordValidation } from "../util/dataValidator.js"
 import { encryptThisPassword } from "../util/dataEncryptor.js"
@@ -78,9 +78,34 @@ export const loginUser = async (req, res) => {
 
 
 export const connectUserFavoriteYoga = async (req, res) => {
-    const userid = req.body.userid;
+    // const userid = req.body.userid;
+    const userid = req.params.id;
     try {
         const result = await findRelationUserFavoriteToYoga(userid)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+export const connectUserFavoriteMeditation = async (req, res) => {
+    // const userid = req.body.userid;
+    const userid = req.params.id;
+    try {
+        const result = await findRelationUserFavoriteToMeditation(userid)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+export const connectUserFavoriteMusic = async (req, res) => {
+    //const userid = req.body.userid;
+    const userid = req.params.id;
+    try {
+        const result = await findRelationUserFavoriteToMusic(userid)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {

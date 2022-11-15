@@ -1,5 +1,7 @@
 import { getDb } from '../util/db.js'
-import { findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga, findYogaDetails, pushUserFavoriteYoga } from '../services/yogaService.js';
+import myquerystring from 'querystring'
+import myurl from 'url'
+import { findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga, findYogaDetails, pushUserFavoriteYoga, findYogaCategory } from '../services/yogaService.js';
 
 export const getOneRandomYoga = async (req, res) => {
     try {
@@ -11,9 +13,11 @@ export const getOneRandomYoga = async (req, res) => {
 }
 
 export const searchYogaProgramm = async (req, res) => {
-    const searchStr = req.body.searchyogastring
+    let searchyogastring = req.query
+    searchyogastring = searchyogastring.stryoga
+
     try {
-        const yogaprogramm = await findYogaProgramm(searchStr)
+        const yogaprogramm = await findYogaProgramm(searchyogastring)
         res.status(200).json(yogaprogramm);
     } catch (err) {
         res.status(500).json({ error: err })
@@ -42,8 +46,8 @@ export const getYogaDetails = async (req, res) => {
     }
 }
 
-
-// setFavoriteYoga
+// ????
+// setFavoriteYoga 
 export const setFavoriteYoga = async (req, res) => {
     const yoga_id = req.params.id
     const user_id = req.body.user_id
@@ -62,6 +66,22 @@ export const pushToUserYogaFavoriteList = async (req, res) => {
     const user_id = req.body.user_id
     try {
         const result = await pushUserFavoriteYoga(yoga_id, user_id)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+// searchYogaCategory
+export const searchYogaCategory = async (req, res) => {
+    //?????????
+    let query = req.query;
+
+    let stryogacategory = query.stryogacategory;
+
+    try {
+        const result = await findYogaCategory(stryogacategory)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {

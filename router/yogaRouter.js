@@ -1,4 +1,4 @@
-import { getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, getYogaDetails, setFavoriteYoga, pushToUserYogaFavoriteList } from '../controller/yogaController.js'
+import { getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, getYogaDetails, setFavoriteYoga, pushToUserYogaFavoriteList, searchYogaCategory } from '../controller/yogaController.js'
 import express from 'express'
 
 export const router = new express.Router()
@@ -15,3 +15,7 @@ router.get('/api/getyoga/:id', getYogaDetails)
 router.put('/api/setfavoriteyoga/:id', setFavoriteYoga)
 // Relation = Profile pushToUserYogaFavoriteList
 router.put('/api/addyogafavorite/:id', pushToUserYogaFavoriteList)
+
+// Find Yoga Programm // Relation = Second Navigation Bar
+router.get('/api/findyogacategory', searchYogaCategory)
+
