@@ -58,8 +58,12 @@ export const loginUser = async (req, res) => {
                 console.log(findUser.password)
 
                 const token = createToken({ user: findUser._id })
-                // Here you can end the user_id
-                res.status(200).json({ token: token, user_id: findUser._id })
+                // Here you can add the user_id
+                res.status(200).json({
+                    token: token,
+                    user_id: findUser._id,
+                    user_name: findUser.name
+                })
             }
             else {
                 res.status(403).json({ message: '1 Wrong Login Data! Please try again! ' })
