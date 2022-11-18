@@ -1,7 +1,16 @@
 import { getDb } from '../util/db.js'
 import myquerystring from 'querystring'
 import myurl from 'url'
-import { findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga, findYogaDetails, pushUserFavoriteYoga, findYogaCategory } from '../services/yogaService.js';
+import { getAllYogas, findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga, findYogaDetails, pushUserFavoriteYoga, findYogaCategory, favorizeYoga } from '../services/yogaService.js';
+
+export const getAllYoga = async (req, res) => {
+    try {
+        const findAllYogas = await getAllYogas()
+        res.status(200).json(findAllYogas);
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
 
 export const getOneRandomYoga = async (req, res) => {
     try {
@@ -14,6 +23,7 @@ export const getOneRandomYoga = async (req, res) => {
 
 export const searchYogaProgramm = async (req, res) => {
     let searchyogastring = req.query
+    // Integrate stryoga in Client Page 
     searchyogastring = searchyogastring.stryoga
 
     try {
@@ -88,3 +98,18 @@ export const searchYogaCategory = async (req, res) => {
         res.status(500).json({ error: err })
     }
 }
+
+
+export const setFavorite = async (req, res) => {
+    const yoga_id = req.params.id
+    //?????????
+
+    try {
+        const result = await favorizeYoga(yoga_id)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+

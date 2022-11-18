@@ -1,5 +1,5 @@
 import express from 'express'
-import { registerUser, loginUser, connectUserFavoriteYoga, connectUserFavoriteMeditation, connectUserFavoriteMusic } from '../controller/userController.js'
+import { registerUser, loginUser, connectUserFavoriteYoga, connectUserFavoriteMeditation, connectUserFavoriteMusic, finduser } from '../controller/userController.js'
 
 export const router = new express.Router()
 
@@ -18,3 +18,6 @@ router.get('/api/userfavoritemeditation/:id', connectUserFavoriteMeditation)
 
 //Relation = User Profile First Block Favorite Music
 router.get('/api/userfavoritemusic/:id', connectUserFavoriteMusic)
+
+// Relation to profile = Find user by id
+router.get('/api/finduser', finduser)

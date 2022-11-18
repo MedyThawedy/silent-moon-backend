@@ -2,6 +2,14 @@ import { getDb } from "../util/db.js"
 import { ObjectId } from "mongodb"
 // https://chartio.com/resources/tutorials/how-to-use-a-sql-like-statement-in-mongodb/
 
+// getAllYoga
+export const getAllYogas = async () => {
+    // Get a playlist
+    const db = await getDb();
+    const findAllYogas = await db.collection('yoga').find().toArray()
+    return findAllYogas;
+}
+
 export const findOneRandomYoga = async () => {
     // Get a playlist
     const db = await getDb();
@@ -54,3 +62,12 @@ export const findYogaCategory = async (searchStr) => {
     return yogaprogramm;
 }
 
+
+
+//https://www.w3resource.com/mongodb/mongodb-array-update-operator-$push.php
+// Find User with the userid and insert yoga_id in the user collection
+export const favorizeYoga = async (yogaid) => {
+    const db = await getDb()
+    const result = await db.collection('yoga').updateOne({ _id: new ObjectId(yogaid) }, { $set: { category: 'Favorites' } })
+    return result
+}

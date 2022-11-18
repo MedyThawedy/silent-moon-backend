@@ -2,20 +2,34 @@ import { getDb } from '../util/db.js'
 import { getAllMusic, addOneSong, findSongById, pushUserFavoriteMusic, pushToMeditationPlaylist } from '../services/musicService.js';
 
 export const getMusic = async (req, res) => {
-    const findAllMusic = await getAllMusic()
-    res.status(200).json(findAllMusic);
+    try {
+        const findAllMusic = await getAllMusic()
+        res.status(200).json(findAllMusic);
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
 }
 
 export const addMusic = async (req, res) => {
     const song = req.body;
-    const responseAddSong = await addOneSong(song)
-    res.status(200).json(responseAddSong);
+    try {
+
+        const responseAddSong = await addOneSong(song)
+        res.status(200).json(responseAddSong);
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
 }
 
 export const getOneSong = async (req, res) => {
     const songid = req.params.id;
-    const findSong = await findSongById(songid)
-    res.status(200).json(findSong);
+
+    try {
+        const findSong = await findSongById(songid)
+        res.status(200).json(findSong);
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
 }
 
 export const pushToUserMusicFavoriteList = async (req, res) => {
