@@ -15,13 +15,13 @@ const app = express()
 
 https://javascript.plainenglish.io/how-to-fix-413-request-entity-too-large-error-in-node-js-226c0070e4f4
 // fixing "413 Request Entity Too Large" errors
-app.use(express.json({ limit: "16mb", extended: true }))
-app.use(express.urlencoded({ limit: "16mb", extended: true, parameterLimit: 50000 }))//
+app.use(express.json({ limit: "16mb", extended: true })) // { limit: "16mb", extended: true }
+app.use(express.urlencoded({ limit: "16mb", extended: true, parameterLimit: 50000 }))// { limit: "16mb", extended: true, parameterLimit: 50000 }
 
 // GridFs
 
 //middleware
-//app.use(cors({origin: "http://localhost:3000"}));
+//app.use(cors({ origin: "http://localhost:3000" }));
 app.use(morgan('dev'))
 app.use(cors())
 //app.use(express.json({ limit: '10mb' }))

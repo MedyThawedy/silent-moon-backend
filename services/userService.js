@@ -84,3 +84,15 @@ export const findRelationUserFavoriteToMusic = async (userid) => {
 }
 
 
+// This function check for duplicates
+export const findUserById = async (userid) => {
+    const db = await getDb();
+
+    const finduser = await db.collection('user').findOne({
+        $or: [{ _id: new ObjectId(userid) }]
+    })
+    return finduser;
+}
+
+
+

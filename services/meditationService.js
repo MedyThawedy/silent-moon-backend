@@ -1,6 +1,16 @@
 import { getDb } from "../util/db.js"
 import { ObjectId } from "mongodb"
 
+
+// getAllMeditations
+export const getAllMeditations = async () => {
+    // Get a playlist
+    const db = await getDb();
+    const findAllMeditation = await db.collection('meditation').find().toArray()
+    return findAllMeditation;
+}
+
+
 export const findOneRandomMeditation = async () => {
     // Get a playlist
     const db = await getDb();
@@ -75,4 +85,9 @@ export const findMeditationCategory = async (searchStr) => {
 }
 
 
+export const doFavorizeMeditation = async (meditationid) => {
+    const db = await getDb()
+    const result = await db.collection('meditation').updateOne({ _id: new ObjectId(meditationid) }, { $set: { category: 'Favorites' } })
+    return result
+}
 

@@ -1,7 +1,10 @@
-import { getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, getYogaDetails, setFavoriteYoga, pushToUserYogaFavoriteList, searchYogaCategory } from '../controller/yogaController.js'
+import { getAllYoga, getOneRandomYoga, searchYogaProgramm, searchRecommendedYogaProgram, getYogaDetails, setFavoriteYoga, pushToUserYogaFavoriteList, searchYogaCategory, setFavorite } from '../controller/yogaController.js'
 import express from 'express'
 
 export const router = new express.Router()
+
+// Get all yoga programms
+router.get('/api/getallyoga', getAllYoga)
 
 // Get one random yoga programm for the home component // Relation = Home component (On the top left)  
 router.get('/api/getrandomyoga', getOneRandomYoga)
@@ -19,3 +22,5 @@ router.put('/api/addyogafavorite/:id', pushToUserYogaFavoriteList)
 // Find Yoga Programm // Relation = Second Navigation Bar
 router.get('/api/findyogacategory', searchYogaCategory)
 
+// Set Favorite directly in the collection
+router.put('/api/setfavorite/:id', setFavorite)

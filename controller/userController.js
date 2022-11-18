@@ -1,8 +1,9 @@
-import { saveUser, findOneUserWithThisEmailAdress, findRelationUserFavoriteToYoga, findRelationUserFavoriteToMeditation, findRelationUserFavoriteToMusic } from "../services/userService.js"
+import { saveUser, findOneUserWithThisEmailAdress, findRelationUserFavoriteToYoga, findRelationUserFavoriteToMeditation, findRelationUserFavoriteToMusic, findUserById } from "../services/userService.js"
 import validator from 'email-validator'
 import { checkPasswordValidation } from "../util/dataValidator.js"
 import { encryptThisPassword } from "../util/dataEncryptor.js"
-import { createToken } from "../util/token.js";
+import { createToken } from "../util/token.js"
+
 
 export const registerUser = async (req, res) => {
     try {
@@ -57,8 +58,12 @@ export const loginUser = async (req, res) => {
                 console.log(findUser.password)
 
                 const token = createToken({ user: findUser._id })
-
-                res.status(200).json({ token: token })
+                // Here you can add the user_id
+                res.status(200).json({
+                    token: token,
+                    user_id: findUser._id,
+                    user_name: findUser.name
+                })
             }
             else {
                 res.status(403).json({ message: '1 Wrong Login Data! Please try again! ' })
@@ -79,9 +84,11 @@ export const loginUser = async (req, res) => {
 
 export const connectUserFavoriteYoga = async (req, res) => {
     // const userid = req.body.userid;
-    const userid = req.params.id;
+    let query = req.query;
+    let userid = query.id;
+
     try {
-        const result = await findRelationUserFavoriteToYoga(userid)
+        const result = await findUserById(userid)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {
@@ -106,6 +113,20 @@ export const connectUserFavoriteMusic = async (req, res) => {
     const userid = req.params.id;
     try {
         const result = await findRelationUserFavoriteToMusic(userid)
+        console.log(result)
+        res.status(200).json(result)
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+}
+
+export const finduser = async (req, res) => {
+    //const userid = req.body.userid;
+    const queryObj = req.query;
+    const userid = queryObj.user_id;
+    console.log(userid)
+    try {
+        const result = await findUserById(userid)
         console.log(result)
         res.status(200).json(result)
     } catch (err) {
