@@ -1,5 +1,10 @@
 import express from 'express'
-import { getOneRandomMeditation, searchMeditationProgram, searchRecommendedMeditationProgram, getMeditationDetails, pushToUserMeditationFavoriteList, getMeditationPlayList, searchMeditationCategory, getAllMeditation, favorizeMeditation } from '../controller/meditationController.js'
+import {
+    getOneRandomMeditation, searchMeditationProgram,
+    searchRecommendedMeditationProgram, getMeditationDetails,
+    pushToUserMeditationFavoriteList, getMeditationPlayList, searchMeditationCategory,
+    getAllMeditation, favorizeMeditation, saveMeditationprogramm
+} from '../controller/meditationController.js'
 
 
 export const router = new express.Router()
@@ -31,3 +36,7 @@ router.get('/api/findmeditationcategory', searchMeditationCategory)
 
 // Set Favorite directly in the collection
 router.put('/api/addfavorite/:id', favorizeMeditation)
+
+//
+// Add Programm
+router.put('/api/addmeditation', saveMeditationprogramm)

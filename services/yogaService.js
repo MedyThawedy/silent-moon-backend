@@ -71,3 +71,10 @@ export const favorizeYoga = async (yogaid) => {
     const result = await db.collection('yoga').updateOne({ _id: new ObjectId(yogaid) }, { $set: { category: 'Favorites' } })
     return result
 }
+
+export const addYogaProgramm = async (yogaprogramm) => {
+    const db = await getDb();
+    const result = await db.collection('yoga').insertOne(yogaprogramm)
+    return result;
+}
+

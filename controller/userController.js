@@ -18,7 +18,7 @@ export const registerUser = async (req, res) => {
             const findUser = await findOneUserWithThisEmailAdress(user.email)
             //console.log(findUser)
             if (findUser) {
-                res.status(400).send({ "Error": "Duplicate User detected, diese Email Adresse ist schon registriert" })
+                res.status(400).send({ message: "This email exists in our website" })
             } else {
                 //req.body.password
                 console.log('decrypted password = ', user.password)
@@ -31,15 +31,15 @@ export const registerUser = async (req, res) => {
             }
         } else {
             if (!validMail) {
-                return res.status(400).send({ "Error": "Wrong Email Adress." })
+                return res.status(400).send({ message1: "Error caused by email field" })
             } else if (!validPassword) {
-                return res.status(400).send({ "Error": "Wrong Password." })
+                return res.status(400).send({ message2: "Wrong Password! Password minimum length must be between 6 and 100 characters / it must have an uppercase letter, a lower uppercase letter and at least two digits " })
             } else {
-                return res.status(400).send({ "Error": "Wrong surname or username" })
+                return res.status(400).send({ message3: "Registration failed! Wrong data! Please try again" })
             }
         }
     } catch (error) {
-        res.status(500).json({ error: ('An' + error + 'Error happened') })
+        res.status(500).json({ error: ('An' + error + 'Please try again! Wrong data') })
     }
 }
 
@@ -66,17 +66,18 @@ export const loginUser = async (req, res) => {
                 })
             }
             else {
-                res.status(403).json({ message: '1 Wrong Login Data! Please try again! ' })
+                res.status(403).json({ message: 'Login failed! Please try again! ' })
             }
         } else {
-            res.status(403).json({ message: '2 Wrong Login Data! Please try again! ' })
-            console.log('from loginUser', encryptedPasswordFromReqBody)
-            console.log('from loginUser', typeof (encryptedPasswordFromReqBody))
-            console.log('from loginUser', findUser.password)
-            console.log('from loginUser', typeof (findUser.password))
+
+            res.status(403).json({ message: 'Login failed! Please try again! ' })
+            //   console.log('from loginUser', encryptedPasswordFromReqBody)
+            //   console.log('from loginUser', typeof (encryptedPasswordFromReqBody))
+            //   console.log('from loginUser', findUser.password)
+            //  console.log('from loginUser', typeof (findUser.password))
         }
     } catch (error) {
-        res.status(500).json({ error: ('An' + error + 'Error happened') })
+        res.status(403).json({ message: 'Login failed! Please try again! ' })
     }
 
 }
