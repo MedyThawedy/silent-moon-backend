@@ -15,7 +15,7 @@ export const addMusic = async (req, res) => {
     try {
 
         const responseAddSong = await addOneSong(song)
-        res.status(200).json(responseAddSong);
+        res.status(200).json({ message: "Music added!" });
     } catch (err) {
         res.status(500).json({ error: err })
     }

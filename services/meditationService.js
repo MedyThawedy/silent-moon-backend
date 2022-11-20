@@ -14,8 +14,8 @@ export const getAllMeditations = async () => {
 export const findOneRandomMeditation = async () => {
     // Get a playlist
     const db = await getDb();
-    const oneRandomYoga = await db.collection('meditation').findOne()
-    return oneRandomYoga;
+    const oneRandommeditation = await db.collection('meditation').findOne()
+    return oneRandommeditation;
 }
 
 export const findMeditationProgram = async (searchStr) => {
@@ -32,9 +32,9 @@ export const findMeditationProgram = async (searchStr) => {
 export const findRecommendFourRandomMeditation = async () => {
     // Get a playlist
     const db = await getDb();
-    //const fourRandomYoga = await db.collection('meditation').find().limit(4).toArray()
-    const fourRandomYoga = await db.collection('meditation').aggregate([{ $sample: { size: 4 } }]).toArray()
-    return fourRandomYoga;
+    //const fourRandommeditation = await db.collection('meditation').find().limit(4).toArray()
+    const fourRandommeditation = await db.collection('meditation').aggregate([{ $sample: { size: 4 } }]).toArray()
+    return fourRandommeditation;
 }
 
 export const findMeditationDetails = async (id) => {
@@ -79,9 +79,9 @@ export const findMeditationCategory = async (searchStr) => {
     const db = await getDb();
     //const sqlLikeStatement = "/" + searchStr + "/"
     //{'title': {'$regex': searchStr}}
-    const yogaprogramm = await db.collection('meditation').find({ 'category': { '$regex': searchStr } }).toArray()
-    //const yogaprogramm = await db.collection('yoga').find({ title: sqlLikeStatement }).toArray()
-    return yogaprogramm;
+    const meditationprogramm = await db.collection('meditation').find({ 'category': { '$regex': searchStr } }).toArray()
+    //const meditationprogramm = await db.collection('meditation').find({ title: sqlLikeStatement }).toArray()
+    return meditationprogramm;
 }
 
 
@@ -90,4 +90,12 @@ export const doFavorizeMeditation = async (meditationid) => {
     const result = await db.collection('meditation').updateOne({ _id: new ObjectId(meditationid) }, { $set: { category: 'Favorites' } })
     return result
 }
+
+
+export const addMeditationProgramm = async (meditationprogramm) => {
+    const db = await getDb();
+    const result = await db.collection('meditation').insertOne(meditationprogramm)
+    return result;
+}
+
 

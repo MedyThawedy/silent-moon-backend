@@ -1,7 +1,10 @@
 import { getDb } from '../util/db.js'
 import myquerystring from 'querystring'
 import myurl from 'url'
-import { getAllYogas, findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga, findYogaDetails, pushUserFavoriteYoga, findYogaCategory, favorizeYoga } from '../services/yogaService.js';
+import {
+    getAllYogas, findOneRandomYoga, findYogaProgramm, findRecommendFourRandomYoga,
+    findYogaDetails, pushUserFavoriteYoga, findYogaCategory, favorizeYoga, addYogaProgramm
+} from '../services/yogaService.js';
 
 export const getAllYoga = async (req, res) => {
     try {
@@ -113,3 +116,14 @@ export const setFavorite = async (req, res) => {
     }
 }
 
+
+export const saveYogaprogramm = async (req, res) => {
+    const yogaProgramm = req.body;
+    try {
+        const appointment = await addYogaProgramm(yogaProgramm)
+        res.status(200).json({ message: 'Yoga Programm saved! ' });
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+
+}

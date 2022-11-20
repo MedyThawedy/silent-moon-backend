@@ -16,4 +16,11 @@ export const pushAppointmentToUser = async (reminderid, userid) => {
     return result
 }
 
+export const getAllAppointment = async () => {
+    const db = await getDb();
+    const result = await db.collection('reminder').find().toArray()
+    return result;
+}
+
+
 

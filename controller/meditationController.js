@@ -1,5 +1,10 @@
 
-import { getAllMeditations, findOneRandomMeditation, findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails, pushUserFavoriteMeditation, findRelationMeditationMusic, findMeditationCategory, doFavorizeMeditation } from '../services/meditationService.js';
+import {
+    getAllMeditations, findOneRandomMeditation,
+    findMeditationProgram, findRecommendFourRandomMeditation, findMeditationDetails,
+    pushUserFavoriteMeditation, findRelationMeditationMusic, findMeditationCategory,
+    doFavorizeMeditation, addMeditationProgramm
+} from '../services/meditationService.js';
 
 
 
@@ -14,8 +19,8 @@ export const getAllMeditation = async (req, res) => {
 
 export const getOneRandomMeditation = async (req, res) => {
     try {
-        const oneRandomYoga = await findOneRandomMeditation()
-        res.status(200).json(oneRandomYoga);
+        const oneRandommeditation = await findOneRandomMeditation()
+        res.status(200).json(oneRandommeditation);
     } catch (err) {
         res.status(500).json({ error: err })
     }
@@ -122,3 +127,14 @@ export const favorizeMeditation = async (req, res) => {
     }
 }
 
+//addMeditationProgramm
+export const saveMeditationprogramm = async (req, res) => {
+    const meditationProgramm = req.body;
+    try {
+        const addmeditation = await addMeditationProgramm(meditationProgramm)
+        res.status(200).json({ message: 'Meditation Programm saved! ' });
+    } catch (err) {
+        res.status(500).json({ error: err })
+    }
+
+}
