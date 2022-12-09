@@ -33,8 +33,6 @@ here: [SilentMoon](https://silent-moon-client.herokuapp.com/) – Go to Silent M
     <img src="./screenshots/Home.png" width="110" />
     <img src="./screenshots/Yoga Details.png" width="110" />
     <img src="./screenshots/Meditate.jpg" width="110" />
-     <img src="./screenshots/Meditation Details.png" width="110" />
-    <img src="./screenshots/Yoga.jpg" width="110" />
     <img src="./screenshots/Profile.png" width="110" />
 </div>
 
