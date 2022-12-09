@@ -37,6 +37,12 @@ here: [SilentMoon](https://silent-moon-client.herokuapp.com/) – Go to Silent M
 
 </div>
 
+## Team
+
+[Stanislav Dorosenko](https://github.com/Stanni11) <br />
+
+[Hussein Kanaan](https://github.com/HusseinKanaan) <br />
+
 
 
 
