@@ -6,7 +6,6 @@ This app was created for mobile devices.
 After the registration and profile creation, it's possible to explore Yoga Workouts or Meditation Programms. 
 The are different categories and Music Playlists, each Meditation Programm has its own Playlist, each yoga workout has its own video and there are many Live Search Possibilities.
 
-<br>
 
 ## Technolgy Stack 
 
@@ -34,7 +33,6 @@ here: [SilentMoon](https://silent-moon-client.herokuapp.com/) – Go to Silent M
     <img src="./screenshots/Home.png" width="150"/>
     <img src="./screenshots/Yoga Details.png" width="150" />
     <img src="./screenshots/Meditate.jpg" width="150"/>
-
 </div>
 
 ## Team
