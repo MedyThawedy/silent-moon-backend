@@ -30,9 +30,11 @@ here: [SilentMoon](https://silent-moon-client.herokuapp.com/) – Go to Silent M
     <img src="./screenshots/Login.png" width="150" />
      <img src="./screenshots/Welcome.png" width="150" />
     <img src="./screenshots/Reminders.png" width="150" />
-    <img src="./screenshots/Home.png" width="150" />
-    <img src="./screenshots/Yoga Details.png" width="150" />
-    <img src="./screenshots/Meditate.jpg" width="150" />
+    
+    <img src="./screenshots/Home.png" height="300" width="150" />
+    <img src="./screenshots/Yoga Details.png" height="300" width="150" />
+    <img src="./screenshots/Meditate.jpg" height="300" width="150" />
+    
     <img src="./screenshots/Profile.png" width="150" />
 </div>
 
