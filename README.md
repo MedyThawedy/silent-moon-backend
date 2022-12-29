@@ -18,7 +18,7 @@ The technologies used for the creation of this app are:
 - Spotify API.
 
 
-## Link to the Web Mobile App
+## Link to the Mobile Web App
 
 Here: [SilentMoon](https://silent-moon-client.herokuapp.com/) – Go to Silent Moon!
 
